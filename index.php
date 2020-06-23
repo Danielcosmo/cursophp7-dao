@@ -9,11 +9,10 @@ error_reporting(E_ALL);
 
 	require_once("config.php");
 
-	$sql = new Sql();
+	$user = new Usuario();
 
-	$usuarios = $sql->select("SELECT * FROM user");
-
-
-	echo json_encode($usuarios);
+	$user->loadById(1);
+	
+	echo $user;
 
 ?>
