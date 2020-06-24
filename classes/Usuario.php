@@ -1,4 +1,6 @@
+
 <?php
+
 	
 	class Usuario{
 
@@ -45,6 +47,48 @@
 				$this->setValor($row['valor']);
 
 
+			}
+
+		}
+
+		public static function getList(){
+			$sql = new Sql();
+
+			return $sql->select("SELECT * FROM user ORDER BY id");
+		}
+
+		public static function search($nome){
+			$sql = new Sql();
+
+			return $sql->select("SELECT * FROM user WHERE nome LIKE :SEARCH", array(':SEARCH' => "%".$nome."%"
+
+			));
+
+
+		}
+
+		public function login($nome, $id){
+
+				$sql = new Sql();
+
+			$result = $sql->select("SELECT * FROM user WHERE nome = :NOME AND id = :ID", array(
+
+				":NOME" => $nome,
+				":ID" => $id
+
+			));
+
+			if(count($result) > 0){
+
+				$row = $result[0];
+
+				$this->setId($row['id']);
+				$this->setNome($row['nome']);
+				$this->setValor($row['valor']);
+
+
+			}else{
+				throw new Exception("Login e/ou senha inválidos");
 			}
 
 		}
