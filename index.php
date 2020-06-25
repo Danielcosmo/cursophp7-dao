@@ -37,4 +37,9 @@ error_reporting(E_ALL);
 
 	// echo $rs;
 
+	$us = new Usuario("Daniel", 40);
+
+	$us->insert();
+
+	echo $us;
 ?>

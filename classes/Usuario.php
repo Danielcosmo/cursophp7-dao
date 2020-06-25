@@ -1,8 +1,7 @@
 
 <?php
 
-	
-	class Usuario{
+class Usuario{
 
 		private $id;
 		private $nome;
@@ -40,12 +39,7 @@
 
 			if(count($result) > 0){
 
-				$row = $result[0];
-
-				$this->setId($row['id']);
-				$this->setNome($row['nome']);
-				$this->setValor($row['valor']);
-
+				$this->setData($result[0]);
 
 			}
 
@@ -63,13 +57,11 @@
 			return $sql->select("SELECT * FROM user WHERE nome LIKE :SEARCH", array(':SEARCH' => "%".$nome."%"
 
 			));
-
-
 		}
 
 		public function login($nome, $id){
 
-				$sql = new Sql();
+			$sql = new Sql();
 
 			$result = $sql->select("SELECT * FROM user WHERE nome = :NOME AND id = :ID", array(
 
@@ -80,17 +72,40 @@
 
 			if(count($result) > 0){
 
-				$row = $result[0];
-
-				$this->setId($row['id']);
-				$this->setNome($row['nome']);
-				$this->setValor($row['valor']);
+				$this->setData($result[0]);
 
 
 			}else{
 				throw new Exception("Login e/ou senha inválidos");
 			}
 
+		}
+
+		public function setData($data){
+
+			$this->setId($data['id']);
+			$this->setNome($data['nome']);
+			$this->setValor($data['valor']);
+
+		}
+
+		public function insert(){
+			$sql = new Sql();
+
+			$result = $sql->select("CALL sp_user_insert(:NOME, :VALOR)", array(
+				':NOME'=>$this->getNome(),
+				':VALOR'=>$this->getValor()
+			));
+
+			if(count($result) > 0){
+
+				$this->setData($result[0]);
+			}
+		}
+
+		public function __construct($nome = "", $valor = ""){
+			$this->setNome($nome);
+			$this->setValor($valor);
 		}
 
 		public function __toString(){
