@@ -118,6 +118,19 @@ class Usuario{
 
 		}
 
+		public function delete(){
+			$sql = new Sql();
+
+			$sql->query("DELETE FROM user WHERE id = :ID", array(
+				":ID" => $this->getId()
+			));
+
+			$this->setId(0);
+			$this->setNome("");
+			$this->setValor(0);
+
+		}
+
 		public function __construct($nome = "", $valor = ""){
 			$this->setNome($nome);
 			$this->setValor($valor);

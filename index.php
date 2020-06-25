@@ -43,11 +43,20 @@ error_reporting(E_ALL);
 
 	// echo $us;
 
+	//alterar
+	// $us = new Usuario();
+
+	// $us->loadById(9);
+
+	// $us->update("Danny", 30);
+
+	// echo $us;
+
 	$us = new Usuario();
 
 	$us->loadById(9);
 
-	$us->update("Danny", 30);
+	$us->delete();
 
 	echo $us;
 
