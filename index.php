@@ -36,10 +36,19 @@ error_reporting(E_ALL);
 	// $rs->login("Inter", "1");
 
 	// echo $rs;
+	////INSERT
+	// $us = new Usuario("Daniel", 40);
 
-	$us = new Usuario("Daniel", 40);
+	// $us->insert();
 
-	$us->insert();
+	// echo $us;
+
+	$us = new Usuario();
+
+	$us->loadById(9);
+
+	$us->update("Danny", 30);
 
 	echo $us;
+
 ?>

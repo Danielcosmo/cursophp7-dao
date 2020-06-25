@@ -103,6 +103,21 @@ class Usuario{
 			}
 		}
 
+		public function update($nome, $valor){
+
+			$this->setNome($nome);
+			$this->setValor($valor);
+
+			$sql = new Sql();
+
+			$sql->query("UPDATE user SET nome = :NOME, valor = :VALOR WHERE id = :ID", array(
+					':NOME' => $this->getNome(),
+					':VALOR' => $this->getValor(),
+					':ID' => $this->getId() 
+			));
+
+		}
+
 		public function __construct($nome = "", $valor = ""){
 			$this->setNome($nome);
 			$this->setValor($valor);
